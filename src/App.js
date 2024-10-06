@@ -1,16 +1,17 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import Homepage from "./components/homepage";
+// import Homepage from "./components/Homepage";
+import Navbar from "./components/Navbar";
+import {BrowserRouter} from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
       <div>
-        <p>hello, this is henry</p>
-        <Homepage />
-
+          <BrowserRouter basename={"/"}>
+              <Navbar />
+          </BrowserRouter>
       </div>
 
   );
 }
 
-export default App;

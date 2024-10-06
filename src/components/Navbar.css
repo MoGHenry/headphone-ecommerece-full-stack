@@ -1,0 +1,33 @@
+.navbar {
+  background-color: lightgreen;
+  padding: 10px 20px;
+  display: flex;
+  /*justify-content: space-between; !* justify the content to space between *!*/
+  align-items: center; /* align the items to center */
+}
+.nav-item {
+  margin-right: 20px;
+  display: inline-block; /* display as block element */
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: capitalize; /* capitalize the first letter of each word */
+  color: #333; /* default text color */
+  text-decoration: none; /* remove underline */
+  transition: color 0.3s ease; /* transition effect on hover */
+  align-content: center; /* align the content to center */
+}
+
+/* hover effect */
+.nav-item:hover {
+  color: #f00;
+}
+
+
+.nav-item:last-child {
+  margin-right: 0;
+}
+
+.nav-item.active {
+  color: #f00;
+}
