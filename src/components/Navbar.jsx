@@ -11,10 +11,7 @@ export default function Navbar() {
     return (
         <div>
             <nav className={"navbar"}>
-                {/*<Link to="/" className="nav-item">Homepage</Link>*/}
-                <Link to="/" className="nav-item">Product List</Link>
                 <Link to="/product-list" className="nav-item">Product List</Link>
-                {/*<Link to="/product-details" className="nav-item">Product Details</Link>*/}
                 <Link to="/wishlist" className="nav-item">Wishlist</Link>
                 <Link to="/cart" className="nav-item">Cart</Link>
             </nav>
