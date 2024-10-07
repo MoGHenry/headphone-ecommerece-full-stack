@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from'react'
 import './ProductList.css'
+import { Link } from 'react-router-dom'
 
 // This is a functional component that displays a list of available products.
 // Implement 'useEffect' to fetch product data from a local JSON file '.product_data.json'
@@ -28,19 +29,29 @@ export default function ProductList() {
     // display the list of products
     return (
         <div className="product-list">
-            {products.length === 0 ? <p>No products available</p> : products.map((product, index) => (
-                <div key={index} className="product-list-item">
-                    {/*image also hyperlink to product detail page*/}
-                    <a href={`/product/${product.id}`}>
-                        <img src={product.image} alt={product.name} />
-                    </a>
-
-                    {/*product name and hyperlink to product detail page*/}
-                    <h3><a href={`/product/${product.id}`}>{product.name}</a></h3>
-                    {/*product price*/}
-                    <p className={"product-list-price"}>${product.price}</p>
-                </div>
+            {products.length === 0 ? <p>No products available</p> : products.map((product) => (
+                <ProductListItem product={product} />
             ))}
         </div>
     );
+}
+
+
+function ProductListItem(props){
+    const product = props.product
+
+    return(
+        <div key={product.id} className="product-list-item">
+            {/*image also hyperlink to product detail page*/}
+            <Link to={`/product/${product.id}`}>
+                <img src={product.image} alt={product.name} />
+            </Link>
+            {/*product name and hyperlink to product detail page*/}
+            <Link to={`/product/${product.id}`}>
+                <h3 className={"product-list-name"}>{product.name}</h3>
+            </Link>
+            {/*product price*/}
+            <p className={"product-list-price"}>${product.price}</p>
+        </div>
+    )
 }

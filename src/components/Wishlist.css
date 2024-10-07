@@ -1,0 +1,26 @@
+.wishlist-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px;
+}
+/*let the image on the left side of the product details page*/
+.wishlist-item img {
+    width: 150px;
+    float: left;
+    margin-right: 20px;
+}
+
+.wishlist-price {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: red;
+}
+
+.wishlist-item button {
+    margin: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
