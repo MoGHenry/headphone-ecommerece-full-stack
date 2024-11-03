@@ -1,9 +1,32 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const Product = require('../models/Products');
+const Cart = require('../models/cart');
 
 /* GET product page. */
-router.get('/', function(req, res, next) {
-    res.json({message: "product route"});
+router.get('/', async function (req, res, next) {
+ try {
+     const products = await Product.find();
+     res.json(products);
+ } catch (e) {
+     res.status(500).json({error: 'Failed to fetch products'})
+ }
 });
+
+// GET product details by id
+router.get('/:productID', async function (req, res, next) {
+    try {
+        const product_id = parseInt(req.params.productID, 10);
+        const product = await Product.findOne({id: product_id});
+        if (!product){
+            return res.status(404).json({error: "Product not found"});
+        }
+
+        res.json(product);
+    }
+    catch (e) {
+        res.status(500).json({error: 'Failed to fetch product details', error_message: e});
+    }
+})
 
 module.exports = router;
