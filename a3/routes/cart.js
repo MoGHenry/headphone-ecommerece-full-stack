@@ -1,6 +1,7 @@
 const express = require('express');
 const Product = require("../models/Products");
 const Cart = require("../models/cart");
+const Wishlist = require("../models/wishlist");
 const router = express.Router();
 
 /* GET cart page. */
@@ -85,6 +86,36 @@ router.put('/update-cart-quantity', async (req, res) => {
     }
     catch (e) {
         res.status(500).json({error: "Failed to update product quantity in Cart", error_message: e.message})
+    }
+})
+
+router.post('/move-to-wishlist', async (req, res) => {
+    try {
+        const { productID } = req.body;
+        if (!productID) {
+            return res.status(400).json({error: "Invalid productID"});
+        }
+
+        const product = await Product.findOne({_id: productID});
+        if(!product) {
+            return res.status(400).json({error: "Product not found"});
+        }
+
+        const cartItem = await Cart.findOneAndDelete({productID});
+        if(cartItem) {
+            const wishlistItem = new Wishlist({
+                productID: productID,
+                quantity: cartItem.quantity
+            })
+            await wishlistItem.save();
+            return res.json({message: "Product moved to Wishlist", wishlistItem});
+        }
+        else {
+            return res.status(404).json({error: "Product not found in Cart"});
+        }
+    }
+    catch (e) {
+        res.status(500).json({error: "Failed to move product to Wishlist", error_message: e.message})
     }
 })
 
