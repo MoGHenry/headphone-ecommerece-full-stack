@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const wishlistSchema = new mongoose.Schema({
     productID: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Product",
         required: true
     }
