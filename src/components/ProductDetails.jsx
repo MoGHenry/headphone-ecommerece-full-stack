@@ -7,39 +7,58 @@ import * as StorageUtils from './StorageUtils'
 export default function ProductDetails() {
     const {product_id} = useParams();
     const [product, setProduct] = useState(null);
-    // load cart and wishlist from local storage
-    // const [cart, setCart] = useState(StorageUtils.getStorage('cart'));
-    // const [wishlist, setWishlist] = useState(StorageUtils.getStorage('wishlist'));
 
+    // TODO add to cart and wishlist functionality
     const handleAddToCart = () => {
-        if(StorageUtils.addStorage('cart', product)){
-            alert("Successfully added product to cart")
-            console.log(StorageUtils.getStorage('cart'))
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ productID: product_id, quantity: 1 })
+        };
+        try {
+            fetch("http://localhost:3000/api/cart/add-to-cart/", requestOptions)
+                .then(response => response.json())
+                .then(() => alert("Product added to cart successfully"))
+                .catch(error => {
+                    alert("Error adding product to cart");
+                    console.log("Error adding product to cart:", error);
+                });
         }
-        else{
-            alert("Failed to add product to cart")
-        }
+        catch (error) { console.log(error)}
     }
     const handleAddToWishlist = () => {
-        if(StorageUtils.addStorage('wishlist', product)){
-            alert("Successfully added product to wishlist")
-            console.log(StorageUtils.getStorage('wishlist'))
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ productID: product_id })
         }
-        else{
-            alert("Failed to add product to wishlist")
+        try {
+            fetch("http://localhost:3000/api/wishlist/add-to-wishlist/", requestOptions)
+                .then(response => response.json())
+                .then(message => {
+                    if (message.message === "Product already in Wishlist") {
+                        alert("Product already exists in wishlist");
+                    } else {
+                        alert("Product added to wishlist successfully");
+                    }
+                })
+                .catch(error => {
+                    console.log("Error adding product to wishlist:", error);
+                    alert("Error adding product to wishlist");
+                });
         }
+        catch (error) { console.log(error)}
     }
 
     useEffect(() => {
         // Fetch product data from the JSON file
-        fetch("/product_data.json")
+        fetch("http://localhost:3000/api/products/"+product_id+"/")
             .then(response => response.json())
-            .then(data => {
-                // Find the product matching the product_id from URL params
-                const foundProduct = data.find(p => p.id === Number(product_id));
-                setProduct(foundProduct);
-            })
-            .catch(error => console.log("Error fetching product data:", error));
+            .then(data => setProduct(data))
+            .catch(error => {
+                console.log("Error fetching product data:", error)
+                alert("Error fetching product data");
+            });
     }, [product_id]);
     if (!product) {
         return <div>Loading product details...</div>;

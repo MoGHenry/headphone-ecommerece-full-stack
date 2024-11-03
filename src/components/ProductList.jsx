@@ -12,7 +12,7 @@ export default function ProductList() {
     let [products, setProducts] = useState([])
     console.log("start fetching data")
     useEffect(() => {
-        fetch('./product_data.json')
+        fetch('http://localhost:3000/api/products/')
             .then(response => {
                  console.log("response received");
                  return response.json();
@@ -41,13 +41,13 @@ function ProductListItem(props){
     const product = props.product
 
     return(
-        <div key={product.id} className="product-list-item">
+        <div key={product._id} className="product-list-item">
             {/*image also hyperlink to product detail page*/}
-            <Link to={`/product/${product.id}`}>
+            <Link to={`/product/${product._id}`}>
                 <img src={product.image} alt={product.name} />
             </Link>
             {/*product name and hyperlink to product detail page*/}
-            <Link to={`/product/${product.id}`}>
+            <Link to={`/product/${product._id}`}>
                 <h3 className={"product-list-name"}>{product.name}</h3>
             </Link>
             {/*product price*/}

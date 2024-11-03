@@ -52,14 +52,9 @@ export const addStorage = (key, value) => {
     }
 };
 
-export const getCartTotalCost = () => {
+export const getCartTotalCost = (data) => {
     try {
-        const cart = getStorage('cart');
-        let total_cost = 0;
-        for (let i = 0; i < cart.length; i++) {
-            total_cost += cart[i].price * cart[i].quantity;
-        }
-        return total_cost;
+        return data.cartItems.reduce((sum, item) => sum + item.productID.price * item.quantity, 0).toFixed(2);
     }
     catch (error) {
         console.error(error);
