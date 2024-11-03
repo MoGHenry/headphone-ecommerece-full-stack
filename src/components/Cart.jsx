@@ -10,7 +10,7 @@ export default function Cart() {
     const [shouldFetch, setShouldFetch] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/cart')
+        fetch('http://3.95.60.33:3000/api/cart')
             .then(response => response.json())
             .then(data => {
                 console.log("data", data);
@@ -34,7 +34,7 @@ export default function Cart() {
         };
 
         // Make the fetch request directly inside this function
-        fetch('http://localhost:3000/api/cart/update-cart-quantity', requestOptions)
+        fetch('http://3.95.60.33:3000/api/cart/update-cart-quantity', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.message === "Product quantity updated in Cart") {
@@ -59,7 +59,7 @@ export default function Cart() {
         };
 
         // Make the fetch request directly inside this function
-        fetch('http://localhost:3000/api/cart/move-to-wishlist', requestOptions)
+        fetch('http://3.95.60.33:3000/api/cart/move-to-wishlist', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.message === "Product moved to Wishlist") {
@@ -84,7 +84,7 @@ export default function Cart() {
             })
         };
 
-        fetch('http://localhost:3000/api/cart/remove-from-cart', requestOptions)
+        fetch('http://3.95.60.33:3000/api/cart/remove-from-cart', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.message === "Product removed from Cart") {

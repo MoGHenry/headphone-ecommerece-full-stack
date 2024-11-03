@@ -10,7 +10,7 @@ export default function Wishlist() {
     const [shouldFetch, setShouldFetch] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/wishlist')
+        fetch('http://3.95.60.33:3000/api/wishlist')
             .then(response => response.json())
             .then(data => {
                 console.log("data", data);
@@ -35,7 +35,7 @@ export default function Wishlist() {
         };
 
         // Make the fetch request directly inside this function
-        fetch('http://localhost:3000/api/wishlist/move-to-cart', requestOptions)
+        fetch('http://3.95.60.33:3000/api/wishlist/move-to-cart', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.message === "Product moved to Cart") {
@@ -61,7 +61,7 @@ export default function Wishlist() {
         };
 
         // Make the fetch request directly inside this function
-        fetch('http://localhost:3000/api/wishlist/remove-from-wishlist', requestOptions)
+        fetch('http://3.95.60.33:3000/api/wishlist/remove-from-wishlist', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.message === "Product removed from Wishlist") {

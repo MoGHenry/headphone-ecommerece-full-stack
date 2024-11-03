@@ -16,7 +16,7 @@ export default function ProductDetails() {
             body: JSON.stringify({ productID: product_id, quantity: 1 })
         };
         try {
-            fetch("http://localhost:3000/api/cart/add-to-cart/", requestOptions)
+            fetch("http://3.95.60.33:3000/api/cart/add-to-cart/", requestOptions)
                 .then(response => response.json())
                 .then(() => alert("Product added to cart successfully"))
                 .catch(error => {
@@ -33,7 +33,7 @@ export default function ProductDetails() {
             body: JSON.stringify({ productID: product_id })
         }
         try {
-            fetch("http://localhost:3000/api/wishlist/add-to-wishlist/", requestOptions)
+            fetch("http://3.95.60.33:3000/api/wishlist/add-to-wishlist/", requestOptions)
                 .then(response => response.json())
                 .then(message => {
                     if (message.message === "Product already in Wishlist") {
@@ -52,7 +52,7 @@ export default function ProductDetails() {
 
     useEffect(() => {
         // Fetch product data from the JSON file
-        fetch("http://localhost:3000/api/products/"+product_id+"/")
+        fetch("http://3.95.60.33:3000/api/products/"+product_id+"/")
             .then(response => response.json())
             .then(data => setProduct(data))
             .catch(error => {
