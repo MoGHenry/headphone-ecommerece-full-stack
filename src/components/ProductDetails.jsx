@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from'react-router-dom'
 import { useEffect, useState } from'react'
 import './ProductDetails.css'
-import * as StorageUtils from './StorageUtils'
+// import * as StorageUtils from './StorageUtils'
 
 export default function ProductDetails() {
     const {product_id} = useParams();
