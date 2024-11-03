@@ -6,32 +6,8 @@ const router = express.Router();
 /* GET cart page. */
 router.get('/', async function(req, res, next) {
     try {
-        const cartItems = await Cart.find();
-
-        if (!cartItems || cartItems.length === 0) {
-            return res.status(404).json({ message: 'No items in the cart' });
-        }
-
-        // Populate product details manually since productID is not an ObjectId
-        const populatedCartItems = await Promise.all(cartItems.map(async item => {
-            const product = await Product.findOne({ productID: item.productID });
-            if (product) {
-                return {
-                    productID: product.productID,
-                    name: product.name,
-                    price: product.price,
-                    image: product.image,
-                    quantity: item.quantity
-                };
-            } else {
-                return null;
-            }
-        }));
-
-        // Filter out any null results if a product is not found
-        const validCartItems = populatedCartItems.filter(item => item !== null);
-
-        res.json(validCartItems);
+        const cartItems = await Cart.find().populate("productID", 'name price image');
+        res.json({ cartItems });
     }
     catch (e) {
         res.status(500).json({ error: 'Failed to retrieve cart items', error_message: e.message });
@@ -46,7 +22,7 @@ router.post('/add-to-cart', async (req, res) => {
             return res.status(400).json({error: "Invalid productID or quantity"});
         }
 
-        const product = await Product.findOne({productID: productID});
+        const product = await Product.findOne({_id: productID});
         if(!product) {
             return res.status(400).json({error: "Product not found"});
         }
@@ -68,6 +44,47 @@ router.post('/add-to-cart', async (req, res) => {
     }
     catch (e) {
         res.status(500).json({error: "Failed to add product to Cart", error_message: e.message})
+    }
+})
+
+router.delete('/remove-from-cart', async (req, res) => {
+    try {
+        const { productID } = req.body;
+        if (!productID) {
+            return res.status(400).json({error: "Invalid productID"});
+        }
+
+        const cartItem = await Cart.findOneAndDelete({productID});
+        if(cartItem) {
+            return res.json({message: "Product removed from Cart", cartItem});
+        }
+        else {
+            return res.status(404).json({error: "Product not found in Cart"});
+        }
+    }
+    catch (e) {
+        res.status(500).json({error: "Failed to remove product from Cart", error_message: e.message})
+    }
+})
+
+router.put('/update-cart-quantity', async (req, res) => {
+    try {
+        const { productID, quantity } = req.body;
+        if (!productID || !quantity || quantity<1) {
+            return res.status(400).json({error: "Invalid productID or quantity"});
+        }
+        const cartItem = await Cart.findOne({productID});
+        if(cartItem) {
+            cartItem.quantity = quantity;
+            await cartItem.save();
+            return res.json({message: "Product quantity updated in Cart", cartItem});
+        }
+        else {
+            return res.status(404).json({error: "Product not found in Cart"});
+        }
+    }
+    catch (e) {
+        res.status(500).json({error: "Failed to update product quantity in Cart", error_message: e.message})
     }
 })
 

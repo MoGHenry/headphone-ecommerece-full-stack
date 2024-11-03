@@ -16,8 +16,8 @@ router.get('/', async function (req, res, next) {
 // GET product details by id
 router.get('/:productID', async function (req, res, next) {
     try {
-        const product_id = parseInt(req.params.productID, 10);
-        const product = await Product.findOne({id: product_id});
+        const product_id = req.params.productID;
+        const product = await Product.findOne({_id: product_id});
         if (!product){
             return res.status(404).json({error: "Product not found"});
         }
