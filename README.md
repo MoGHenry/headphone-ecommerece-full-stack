@@ -1,3 +1,6 @@
+## IP address
+`3.95.60.33:3000` [Address](http://3.95.60.33:3000)
+
 ## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
