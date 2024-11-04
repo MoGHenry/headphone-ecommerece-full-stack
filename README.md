@@ -1,5 +1,10 @@
-## IP address
-`3.95.60.33:3000` [Address](http://3.95.60.33:3000)
+## IP Address and Deployed Application
+The application is deployed on an AWS EC2 instance. You can access the live application using the following IP address:
+
+**Web Address of Deployed Application**: `http://3.95.60.33:3000`  
+[Click here to access the deployed application](http://3.95.60.33:3000)
+
+**EC2 Instance Public IP**: `3.95.60.33`
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
