@@ -1,0 +1,5 @@
+:80 {
+    root * /app/a3/public
+    file_server
+    reverse_proxy /api/* http://localhost:3000
+}
