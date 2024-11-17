@@ -10,6 +10,7 @@ let usersRouter = require('./routes/users');
 let productsRouter = require('./routes/products');
 let cartRouter = require('./routes/cart');
 let wishlistRouter = require('./routes/wishlist');
+let authRouter = require('./routes/auth');
 
 let app = express();
 
@@ -33,6 +34,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/wishlist', wishlistRouter);
+app.use('/api/auth', authRouter)
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
