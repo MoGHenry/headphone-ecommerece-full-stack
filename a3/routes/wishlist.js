@@ -1,7 +1,7 @@
 const express = require('express');
-const Wishlist = require("../models/wishlist");
+const Wishlist = require("../models/Wishlist");
 const Product = require("../models/Products");
-const Cart = require("../models/cart");
+const Cart = require("../models/Cart");
 const router = express.Router();
 
 /* GET wishlist page. */

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Products');
-const Cart = require('../models/cart');
+const Cart = require('../models/Cart');
 
 /* GET product page. */
 router.get('/', async function (req, res, next) {
