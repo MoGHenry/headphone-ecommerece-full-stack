@@ -1,9 +1,9 @@
+require('dotenv').config();
 const mongoose = require('mongoose')
+const mongoURI = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@3.95.60.33:27017/admin`;
 const Product = require('../models/Products')
 
-mongoose.connect(
-    'mongodb+srv://moghenry:Henryqiu998@a3.igdq5.mongodb.net/?retryWrites=true&w=majority&appName=a3'
-)
+mongoose.connect(mongoURI)
 .then(
     () => console.log('Adding default product items')
 )
