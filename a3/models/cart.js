@@ -10,6 +10,11 @@ const cartSchema = new mongoose.Schema({
         type: Number,
         required: true,
         min: 1
+    },
+    userID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 });
 
