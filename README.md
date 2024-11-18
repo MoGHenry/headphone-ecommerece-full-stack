@@ -1,10 +1,16 @@
 ## IP Address and Deployed Application
-The application is deployed on an AWS EC2 instance. You can access the live application using the following IP address:
+The application is deployed on an AWS EC2 instance with docker. You can access the live application using the following IP address:
 
 **Web Address of Deployed Application**: `http://3.95.60.33:3000`  
 [Click here to access the deployed application](http://3.95.60.33:3000)
 
 **EC2 Instance Public IP**: `3.95.60.33`
+
+**Estimated grading**
+I tried to implement the caddy but failed
+Users can register and login and obtain the JWT, but I am running out of time implementing the Cart, Wishlist, and profile to handle the JWT
+![image](https://github.com/user-attachments/assets/2d8ec3c9-ee62-4015-8026-2901ede423a2)
+
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
