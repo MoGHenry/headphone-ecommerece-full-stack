@@ -1,4 +1,7 @@
 FROM caddy:latest
+
+WORKDIR /srv
+COPY --from=moghenry/a4-caddy /app/a3/public /srv
+
 WORKDIR /etc/caddy
 COPY Caddyfile /etc/caddy/Caddyfile
-COPY --from=build /app/a3/public /srv
