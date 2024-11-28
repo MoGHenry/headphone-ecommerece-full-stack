@@ -34,7 +34,7 @@ export default function Cart() {
             return;
         }
 
-        fetch('http://3.95.60.33:3000/api/cart', {
+        fetch('/api/cart', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -64,7 +64,7 @@ export default function Cart() {
             })
         };
 
-        fetch('http://3.95.60.33:3000/api/cart/update-cart-quantity', requestOptions)
+        fetch('/api/cart/update-cart-quantity', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.message === 'Product quantity updated in Cart') {
@@ -91,7 +91,7 @@ export default function Cart() {
             })
         };
 
-        fetch('http://3.95.60.33:3000/api/cart/move-to-wishlist', requestOptions)
+        fetch('/api/cart/move-to-wishlist', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.message === 'Product moved to Wishlist') {
@@ -120,7 +120,7 @@ export default function Cart() {
             })
         };
 
-        fetch('http://3.95.60.33:3000/api/cart/remove-from-cart', requestOptions)
+        fetch('/api/cart/remove-from-cart', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.message === 'Product removed from Cart') {

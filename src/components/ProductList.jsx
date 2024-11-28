@@ -12,7 +12,7 @@ export default function ProductList() {
     let [products, setProducts] = useState([])
     console.log("start fetching data")
     useEffect(() => {
-        fetch('http://3.95.60.33:3000/api/products/')
+        fetch('/api/products/')
             .then(response => {
                  console.log("response received");
                  return response.json();

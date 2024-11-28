@@ -47,7 +47,7 @@ export default function UserLogin() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             };
-            fetch('http://3.95.60.33:3000/api/auth/login', requestOptions)
+            fetch('/api/auth/login', requestOptions)
                 .then(response => response.json())
                 .then(data => {
                     if (data.token) {

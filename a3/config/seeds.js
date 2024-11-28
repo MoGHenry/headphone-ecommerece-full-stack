@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose')
-const mongoURI = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@3.95.60.33:27017/admin`;
+const mongoURI = `mongodb://mongodb:27017/test`;
 const Product = require('../models/Products')
 
 mongoose.connect(mongoURI)

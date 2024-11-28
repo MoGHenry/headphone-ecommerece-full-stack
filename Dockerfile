@@ -1,14 +1,21 @@
-FROM node:20 AS build-stage
-WORKDIR /app
-COPY package*.json ./
+FROM node:20 AS frontend
+WORKDIR /frontend
+COPY package*.json /frontend/
 RUN npm install
-COPY . .
+COPY . /frontend/
+
 RUN npm run build
-RUN cp -r build/* /app/a3/public/
+RUN cp -r build/* /frontend/a3/public/
+
+WORKDIR /frontend/a3
+RUN npm install
+
+EXPOSE 8000
+CMD ["npm", "start"]
 
 
-WORKDIR /app/a3
-RUN npm install && npm install -g pm2
 
-EXPOSE 3000
-CMD ["pm2-runtime", "start", "./bin/www"]
+
+
+#RUN npm install && npm install -g pm2
+#CMD ["pm2-runtime", "start", "./bin/www"]

@@ -1,0 +1,45 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - frontend-public:/frontend/a3/public
+#      - /build:/a3/public
+#      - ./api:/api
+#      - /api/node_modules
+    depends_on:
+      - mongodb
+    networks:
+      - webapp-network
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - webapp-network
+  caddy:
+    image: caddy:latest
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - webapp-network
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - frontend-public:/frontend/public
+    depends_on:
+      - backend
+volumes:
+  mongo_data:
+  frontend-public:
+
+networks:
+  webapp-network:
+    driver: bridge

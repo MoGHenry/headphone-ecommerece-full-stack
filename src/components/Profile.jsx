@@ -36,7 +36,7 @@ export default function Profile() {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Update user data with an API call (API endpoint should handle updates)
-        fetch('http://3.95.60.33:3000/api/auth/update-profile', {
+        fetch('/api/auth/update-profile', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

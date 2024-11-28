@@ -1,5 +1,10 @@
 :80 {
-    root * /srv
+    root * /frontend/public
     file_server
-    reverse_proxy /api/* http://localhost:3000
+
+    # Proxy API requests to the backend
+    @api {
+        path /api/*
+    }
+    reverse_proxy @api backend:8000
 }
