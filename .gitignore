@@ -4,3 +4,4 @@ node_modules
 ./a3/.env
 */.env
 build
+/build
