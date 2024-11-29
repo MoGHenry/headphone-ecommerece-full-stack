@@ -1,5 +1,6 @@
 :80 {
-    root * /frontend/public
+    root * /srv
+    try_files {path}
     file_server
 
     # Proxy API requests to the backend

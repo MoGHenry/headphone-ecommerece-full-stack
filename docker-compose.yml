@@ -33,7 +33,7 @@ services:
       - webapp-network
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - frontend-public:/frontend/public
+      - frontend-public:/srv
     depends_on:
       - backend
 volumes:
