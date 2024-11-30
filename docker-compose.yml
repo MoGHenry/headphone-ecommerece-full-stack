@@ -1,5 +1,6 @@
 services:
   backend:
+    container_name: backend
     build:
       context: .
       dockerfile: Dockerfile
@@ -16,6 +17,7 @@ services:
     networks:
       - webapp-network
   mongodb:
+    container_name: mongodb
     image: mongo:latest
     restart: always
     ports:
@@ -25,6 +27,7 @@ services:
     networks:
       - webapp-network
   caddy:
+    container_name: caddy
     image: caddy:latest
     restart: always
     ports:
@@ -33,12 +36,16 @@ services:
       - webapp-network
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - frontend-public:/srv
+      - frontend-public:/usr/share/caddy
+      - caddy-config:/config
+      - caddy-data:/data
     depends_on:
       - backend
 volumes:
   mongo_data:
   frontend-public:
+  caddy-config:
+  caddy-data:
 
 networks:
   webapp-network:
