@@ -4,8 +4,7 @@ COPY package*.json /frontend/
 RUN npm install
 COPY . /frontend/
 
-RUN npm run build
-RUN cp -r build/* /frontend/a3/public/
+RUN npm run build && cp -r build/* /frontend/a3/public/
 
 WORKDIR /frontend/a3
 RUN npm install
