@@ -1,16 +1,30 @@
 // import * as React from 'react'
 import React, {useState, useEffect} from 'react'
 // import * as StorageUtils from './StorageUtils'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import './Wishlist.css'
+import {checkTokenExpiry} from "./authutils";
 
 
 export default function Wishlist() {
     const [wishlist, setWishlist] = useState([]);
     const [shouldFetch, setShouldFetch] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('/api/wishlist')
+        const token = localStorage.getItem('token');
+        const { valid } = checkTokenExpiry(token);
+        if (!valid) {
+            alert('Access denied. Please log in first.');
+            localStorage.removeItem('token');
+            navigate('/login');
+            return;
+        }
+        fetch('/api/wishlist', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 console.log("data", data);
@@ -23,12 +37,16 @@ export default function Wishlist() {
                 }
             })
             .catch(error => console.log("Error fetching wishlist items:", error));
-    }, [shouldFetch]);
+    }, [shouldFetch, navigate]);
 
     const handleMoveToCart = (product_id, product) => {
+        const token = localStorage.getItem('token');
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify({
                 productID: product_id
             })
@@ -52,9 +70,13 @@ export default function Wishlist() {
     }
 
     const handleRemoveFromWishlist = (product_id) => {
+        const token = localStorage.getItem('token');
         const requestOptions = {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify({
                 productID: product_id
             })

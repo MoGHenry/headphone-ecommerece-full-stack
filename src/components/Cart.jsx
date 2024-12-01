@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as StorageUtils from './StorageUtils';
 import { Link, useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
 import './Cart.css';
+import { checkTokenExpiry } from "./authutils";
 
 export default function Cart() {
     const [items, setItems] = useState([]);
@@ -13,22 +13,10 @@ export default function Cart() {
     // Check if the JWT is valid, otherwise redirect to login
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (!token) {
+        // const { valid, userID, email, name } = checkTokenExpiry(token);
+        const { valid } = checkTokenExpiry(token);
+        if (!valid) {
             alert('Access denied. Please log in first.');
-            navigate('/login');
-            return;
-        }
-
-        try {
-            const decodedToken = jwtDecode(token);
-            if (decodedToken.exp * 1000 < Date.now()) {
-                alert('Session expired. Please log in again.');
-                localStorage.removeItem('token');
-                navigate('/login');
-                return;
-            }
-        } catch (error) {
-            console.error('Invalid token:', error);
             localStorage.removeItem('token');
             navigate('/login');
             return;

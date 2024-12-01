@@ -11,13 +11,16 @@ export default function Profile() {
     // Check if user is authenticated and check if token expired
     useEffect(() => {
         const token = localStorage.getItem('token');
-        const { valid, userID, email } = checkTokenExpiry(token);
+        const { valid, userID, email, name } = checkTokenExpiry(token);
         if (!valid) {
             alert('Session expired. Please login again.');
+            localStorage.removeItem('token');
+            navigate('/login');
+            return;
         }
 
-        setUserData({ username: payload.username, email: payload.email });
-        setFormData({ username: payload.username, email: payload.email });
+        setUserData({ username: name, email: email });
+        setFormData({ username: name, email: email });
     }, [navigate]);
 
     // Handle input changes for editing profile
@@ -43,7 +46,8 @@ export default function Profile() {
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
+                if (data.message === 'Profile updated successfully') {
+                    localStorage.setItem('token', data.token);
                     alert('Profile updated successfully');
                     setUserData(formData);
                     setEditMode(false);
