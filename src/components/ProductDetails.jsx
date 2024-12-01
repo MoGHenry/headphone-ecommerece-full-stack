@@ -10,9 +10,13 @@ export default function ProductDetails() {
 
     // TODO add to cart and wishlist functionality
     const handleAddToCart = () => {
+        const token = localStorage.getItem('token');
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify({ productID: product_id, quantity: 1 })
         };
         try {
@@ -27,9 +31,13 @@ export default function ProductDetails() {
         catch (error) { console.log(error)}
     }
     const handleAddToWishlist = () => {
+        const token = localStorage.getItem('token');
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify({ productID: product_id })
         }
         try {

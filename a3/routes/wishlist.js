@@ -4,25 +4,9 @@ const Wishlist = require("../models/Wishlist");
 const Product = require("../models/Products");
 const Cart = require("../models/Cart");
 const router = express.Router();
+const authenticateUser = require('../utils/authMiddleware');
 require('dotenv').config();
 
-// Middleware to verify JWT and extract userID
-const authenticateUser = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (!token) {
-        return res.status(401).json({ error: 'Access denied. No token provided.' });
-    }
-
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.userID = decoded.userID; // Attach userID to the request object
-        next();
-    } catch (err) {
-        return res.status(403).json({ error: 'Invalid token' });
-    }
-};
 
 /* GET wishlist page for the current user */
 router.get('/', authenticateUser, async function (req, res, next) {
