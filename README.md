@@ -1,21 +1,17 @@
 ## IP Address and Deployed Application
 The application is deployed on an AWS EC2 instance with docker. You can access the live application using the following IP address:
 
-**Web Address of Deployed Application**: `http://3.95.60.33:3000`  
-[Click here to access the deployed application](http://3.95.60.33:3000)
+**Web Address of Deployed Application**: `http://54.88.103.131`  
+[Click here to access the deployed application](http://54.88.103.131)
 
-**EC2 Instance Public IP**: `3.95.60.33`
-
-**Estimated grading**
-I tried to implement the caddy but failed
-Users can register and login and obtain the JWT, but I am running out of time implementing the Cart, Wishlist, and profile to handle the JWT
-![image](https://github.com/user-attachments/assets/2d8ec3c9-ee62-4015-8026-2901ede423a2)
+**EC2 Instance Public IP**: `54.88.103.131`
 
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Running the Application](#running-the-application)
+- [Running the Application in localhost](#running-the-application)
+- [Dockerize the Application](#docker-setup)
 
 ## Prerequisites
 
@@ -54,3 +50,79 @@ npm start
 This will start the development server, and you can access the application at:
 
 `http://localhost:3000`
+
+## Docker-setup
+### Step 1: Clone the project
+You will need to setup the git in your virtual machine
+Then clone the project using the following command:
+```
+git clone https://github.com/ICSI518/assignment2-MoGHenry.git
+```
+
+### Step 2: Create .env
+cd to the project directory
+In `a3` folder, create `.env` file and add your JWT Token 
+```
+cd assignment2-MoGHenry
+touch a3/.env
+nano a3/.env
+```
+
+```
+JWT={Your_JWT_Token}
+```
+
+### Step 3: Install Docker
+#### Add Docker’s GPG Key:
+```
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+```
+#### Set Up the Docker Repository:
+```
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+#### Install Docker:
+```
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+```
+#### Start and Enable Docker:
+```
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+#### Verify Docker Installation:
+```
+docker --version
+```
+
+### Step4: Install Docker Compose
+#### Download the Latest Docker Compose Binary:
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+#### Apply Executable Permissions:
+```
+sudo chmod +x /usr/local/bin/docker-compose
+```
+#### Verify Docker Compose Installation:
+```
+docker-compose --version
+```
+
+### Step 4: Run the Application
+#### Build Image:
+```
+docker-compose -f docker-compose-prod.yml build
+```
+#### Start Container and run in the background:
+```
+docker-compose -f docker-compose-prod.yml up -d
+```
+#### Start Container and run in the foreground:
+```
+docker-compose -f docker-compose-prod.yml up
+```
