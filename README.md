@@ -30,7 +30,7 @@ This project demonstrates skills in full-stack development, integrating multiple
 
 
 ## Table of Contents
-- [IP Address and Deployed Application](#ip-address-and-deployed-application)
+~~- [IP Address and Deployed Application](#ip-address-and-deployed-application)~~
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Running the Application in localhost](#running-the-application)
