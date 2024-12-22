@@ -1,17 +1,48 @@
-## IP Address and Deployed Application
-The application is deployed on an AWS EC2 instance with docker. You can access the live application using the following IP address:
+## Introduction
+This repository contains a feature-rich e-commerce application built using React.js, Express.js, MongoDB, and Docker, with deployment on AWS EC2. It was developed as an individual project to gain hands-on experience in full-stack development, secure authentication, and containerized deployment.
 
-**Web Address of Deployed Application**: `http://54.88.103.131`  
-[Click here to access the deployed application](http://54.88.103.131)
+Key Features:
+- Frontend:
 
-**EC2 Instance Public IP**: `54.88.103.131`
+  -Built with React.js for a dynamic and responsive user interface.
+  -Includes key components like a product list, product details, shopping cart, and wishlist.
+  -Integration with RESTful APIs for seamless interaction with the backend.
+- Backend:
+
+  -Developed using Express.js to handle API requests and manage application logic.
+  -MongoDB Atlas for persistent data storage of products, cart, wishlist, and user information.
+
+-Authentication:
+
+  -Implemented JWT (JSON Web Tokens) for secure user login and session management.
+  -Includes user registration, profile management, and access control for cart and wishlist functionalities.
+
+- Deployment:
+
+  -Deployed on an AWS EC2 instance using PM2 for process management.
+  -Dockerized application with container orchestration via Docker Compose, including Caddy as a reverse proxy for HTTPS support.
+- Additional Features:
+  -User-specific cart and wishlist functionality.
+  -Authentication-based access control for secure operations.
+  -Persistent state management with localStorage for cart and wishlist.
+This project demonstrates skills in full-stack development, integrating multiple technologies, and deploying robust web applications. Perfect for showcasing individual expertise in real-world application development.
+
 
 
 ## Table of Contents
+- [IP Address and Deployed Application](#ip-address-and-deployed-application)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Running the Application in localhost](#running-the-application)
 - [Dockerize the Application](#docker-setup)
+
+## IP Address and Deployed Application
+~~The application is deployed on an AWS EC2 instance with docker. You can access the live application using the following IP address:~~
+
+~~**Web Address of Deployed Application**: `http://54.88.103.131`~~
+~~[Click here to access the deployed application](http://54.88.103.131)~~
+
+~~**EC2 Instance Public IP**: `54.88.103.131`~~
 
 ## Prerequisites
 
